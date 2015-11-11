@@ -10,6 +10,12 @@ var imageUrlText = null;
 var lastImageUrl = null;
 
 function init() {
+    if (!BABYLON.Engine.isSupported()) {
+        var notSupportWebGL = document.querySelector("#notSupportWebGL");
+        notSupportWebGL.style.display = 'block';
+        return;
+    }
+
     // Get the canvas element from our HTML below
     var canvas = document.querySelector("#frontBuffer");
 
@@ -102,7 +108,7 @@ function update() {
 }
 
 function loadImage(canvas, imgUrl, callback) {
-    var canvasContext = canvas.getContext("2d");
+    var canvasContext = dynamicTexture.getContext("2d");
     canvasContext.fillStyle = "#FFFFFF";
     canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
